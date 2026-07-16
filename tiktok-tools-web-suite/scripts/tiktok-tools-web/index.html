@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TikTok / Instagram 工具台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Social Video Tools</p>
+        <h1>TikTok / Instagram 工具台</h1>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="platform-workspace" id="tiktok-workspace">
+        <div class="platform-head">
+          <p class="eyebrow">Workspace 01</p>
+          <h2>TikTok 工作区</h2>
+        </div>
+
+        <section class="module" id="link-module">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Video Link Scraper</p>
+              <h2>TikTok 视频链接扒取</h2>
+            </div>
+            <a class="secondary nav-link" href="history.html">历史文件</a>
+          </div>
+
+          <form class="workspace" id="extract-form">
+            <div class="field">
+              <label for="query-text">文本</label>
+              <textarea
+                id="query-text"
+                name="queryText"
+                rows="7"
+                placeholder="例如：黑色折叠露营扶手椅，杯架，网兜，金属支架"
+                required
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="image-input">图片</label>
+              <label class="upload-box" for="image-input">
+                <span class="upload-title">选择图片</span>
+                <span class="upload-subtitle">支持一张或多张</span>
+              </label>
+              <input id="image-input" name="images" type="file" accept="image/*" multiple />
+              <div class="image-grid" id="image-preview" aria-live="polite"></div>
+            </div>
+
+            <div class="actions">
+              <button class="primary" id="submit-button" type="submit">提取视频链接</button>
+              <button class="secondary" id="clear-button" type="button">清空</button>
+            </div>
+          </form>
+
+          <section class="result-panel" id="result-panel" hidden>
+            <div class="result-head">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h2 id="result-title">已生成</h2>
+              </div>
+              <a class="download-link" id="download-link" href="#" download>下载表格</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>视频链接</th>
+                  </tr>
+                </thead>
+                <tbody id="result-rows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="module" id="profile-module">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Profile Video Export</p>
+              <h2>TikTok 主页视频数据分析</h2>
+            </div>
+            <a class="secondary nav-link" href="profile-history.html">历史文件</a>
+          </div>
+
+          <form class="profile-workspace" id="profile-form">
+            <label class="field">
+              <span>TikTok 主页链接</span>
+              <input
+                id="profile-url"
+                name="profileUrl"
+                type="url"
+                inputmode="url"
+                placeholder="https://www.tiktok.com/@username"
+                autocomplete="off"
+                required
+              />
+            </label>
+
+            <label class="field count-field">
+              <span>提取视频数量</span>
+              <input id="video-count" name="count" type="number" min="1" step="1" value="20" required />
+            </label>
+
+            <label class="chart-toggle">
+              <input id="generate-chart" name="generateChart" type="checkbox" />
+              <span class="switch" aria-hidden="true"><span></span></span>
+              <span class="toggle-text">生成图表</span>
+            </label>
+
+            <div class="actions profile-actions">
+              <button class="primary" id="profile-button" type="submit">生成数据分析表</button>
+            </div>
+          </form>
+
+          <div id="profile-status" class="status" role="status" aria-live="polite"></div>
+          <section class="result-panel" id="profile-result" hidden>
+            <div class="result-head">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h2 id="profile-file-summary">已生成</h2>
+              </div>
+              <div id="profile-download-list" class="download-list"></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="module" id="video-file-module">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Video File Export</p>
+              <h2>TikTok 视频文件提取</h2>
+            </div>
+            <a class="secondary nav-link" href="video-file-history.html">历史文件</a>
+          </div>
+
+          <form class="video-file-workspace" id="video-file-form">
+            <label class="field video-file-field">
+              <span>TikTok 视频链接</span>
+              <input
+                id="video-file-url"
+                name="videoFileUrl"
+                type="url"
+                inputmode="url"
+                placeholder="https://www.tiktok.com/@username/video/1234567890"
+                autocomplete="off"
+                required
+              />
+            </label>
+
+            <div class="actions video-file-actions">
+              <button class="primary" id="video-file-button" type="submit">提取MP4文件</button>
+            </div>
+          </form>
+
+          <div id="video-file-status" class="status" role="status" aria-live="polite"></div>
+          <section class="result-panel" id="video-file-result" hidden>
+            <div class="result-head">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h2 id="video-file-summary">已生成 MP4 文件</h2>
+              </div>
+              <a class="download-link" id="video-file-download" href="#" download>下载MP4</a>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <section class="platform-workspace" id="instagram-workspace">
+        <div class="platform-head">
+          <p class="eyebrow">Workspace 02</p>
+          <h2>Instagram 工作区</h2>
+        </div>
+
+        <section class="module" id="instagram-link-module">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Video Link Scraper</p>
+              <h2>Instagram 视频链接扒取</h2>
+            </div>
+            <a class="secondary nav-link" href="instagram-link-history.html">历史文件</a>
+          </div>
+
+          <form class="workspace" id="instagram-link-form">
+            <div class="field">
+              <label for="instagram-query-text">文本</label>
+              <textarea
+                id="instagram-query-text"
+                name="queryText"
+                rows="7"
+                placeholder="例如：黑色折叠露营扶手椅，杯架，网兜，金属支架"
+                required
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="instagram-image-input">图片</label>
+              <label class="upload-box" for="instagram-image-input">
+                <span class="upload-title">选择图片</span>
+                <span class="upload-subtitle">支持一张或多张</span>
+              </label>
+              <input id="instagram-image-input" name="images" type="file" accept="image/*" multiple />
+              <div class="image-grid" id="instagram-image-preview" aria-live="polite"></div>
+            </div>
+
+            <div class="actions">
+              <button class="primary" id="instagram-link-button" type="submit">提取视频链接</button>
+              <button class="secondary" id="instagram-link-clear" type="button">清空</button>
+            </div>
+          </form>
+
+          <section class="result-panel" id="instagram-link-result" hidden>
+            <div class="result-head">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h2 id="instagram-link-title">已生成</h2>
+              </div>
+              <a class="download-link" id="instagram-link-download" href="#" download>下载表格</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>视频链接</th>
+                  </tr>
+                </thead>
+                <tbody id="instagram-link-rows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="module" id="instagram-profile-module">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Profile Video Export</p>
+              <h2>Instagram 主页视频数据分析</h2>
+            </div>
+            <a class="secondary nav-link" href="instagram-profile-history.html">历史文件</a>
+          </div>
+
+          <form class="profile-workspace" id="instagram-profile-form">
+            <label class="field">
+              <span>Instagram 主页链接</span>
+              <input
+                id="instagram-profile-url"
+                name="profileUrl"
+                type="url"
+                inputmode="url"
+                placeholder="https://www.instagram.com/username/"
+                autocomplete="off"
+                required
+              />
+            </label>
+
+            <label class="field count-field">
+              <span>提取视频数量</span>
+              <input id="instagram-video-count" name="count" type="number" min="1" step="1" value="20" required />
+            </label>
+
+            <label class="chart-toggle">
+              <input id="instagram-generate-chart" name="generateChart" type="checkbox" />
+              <span class="switch" aria-hidden="true"><span></span></span>
+              <span class="toggle-text">生成图表</span>
+            </label>
+
+            <div class="actions profile-actions">
+              <button class="primary" id="instagram-profile-button" type="submit">生成数据分析表</button>
+            </div>
+          </form>
+
+          <div id="instagram-profile-status" class="status" role="status" aria-live="polite"></div>
+          <section class="result-panel" id="instagram-profile-result" hidden>
+            <div class="result-head">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h2 id="instagram-profile-summary">已生成</h2>
+              </div>
+              <div id="instagram-profile-download-list" class="download-list"></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="module" id="instagram-module">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Video File Export</p>
+              <h2>Instagram 视频文件提取</h2>
+            </div>
+            <a class="secondary nav-link" href="instagram-history.html">历史文件</a>
+          </div>
+
+          <form class="video-file-workspace" id="instagram-form">
+            <label class="field video-file-field">
+              <span>Instagram 视频链接</span>
+              <input
+                id="instagram-url"
+                name="instagramUrl"
+                type="url"
+                inputmode="url"
+                placeholder="https://www.instagram.com/reel/DWoqRuaiLko/"
+                autocomplete="off"
+                required
+              />
+            </label>
+
+            <div class="actions video-file-actions">
+              <button class="primary" id="instagram-button" type="submit">提取MP4文件</button>
+            </div>
+          </form>
+
+          <div id="instagram-status" class="status" role="status" aria-live="polite"></div>
+          <section class="result-panel" id="instagram-result" hidden>
+            <div class="result-head">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h2 id="instagram-summary">已生成 MP4 文件</h2>
+              </div>
+              <a class="download-link" id="instagram-download" href="#" download>下载MP4</a>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js?v=20260716-instagram-workspace"></script>
+  </body>
+</html>

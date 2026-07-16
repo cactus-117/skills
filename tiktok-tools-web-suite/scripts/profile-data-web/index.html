@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TikTok 视频数据提取</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel" aria-labelledby="page-title">
+        <div class="masthead">
+          <div>
+            <p class="kicker">TikTok Export</p>
+            <h1 id="page-title">视频数据提取</h1>
+          </div>
+          <div class="mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <form id="extract-form" class="form">
+          <label class="field">
+            <span>TikTok 主页链接</span>
+            <input
+              id="profile-url"
+              name="profileUrl"
+              type="url"
+              inputmode="url"
+              placeholder="https://www.tiktok.com/@username"
+              autocomplete="off"
+              required
+            />
+          </label>
+
+          <label class="field count-field">
+            <span>提取视频数量</span>
+            <input
+              id="video-count"
+              name="count"
+              type="number"
+              min="1"
+              step="1"
+              value="20"
+              required
+            />
+          </label>
+
+          <label class="chart-toggle">
+            <input id="generate-chart" name="generateChart" type="checkbox" />
+            <span class="switch" aria-hidden="true">
+              <span></span>
+            </span>
+            <span class="toggle-text">生成图表</span>
+          </label>
+
+          <button id="extract-button" class="primary" type="submit">
+            <span class="button-label">提取</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+        <div id="result" class="result" hidden>
+          <div>
+            <span class="result-label">已生成</span>
+            <strong id="file-summary"></strong>
+          </div>
+          <div id="download-list" class="download-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

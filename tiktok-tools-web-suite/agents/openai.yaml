@@ -1,0 +1,4 @@
+interface:
+  display_name: "TikTok 网页工具台"
+  short_description: "TikTok 和 Instagram 视频可视化工具台"
+  default_prompt: "Use $tiktok-tools-web-suite to start or update the local TikTok and Instagram web tool suite."
